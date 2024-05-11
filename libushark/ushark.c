@@ -162,7 +162,6 @@ static void
 gather_ushark_compile_info(feature_list l)
 {
     /* Capture libraries */
-    gather_caplibs_compile_info(l);
     epan_gather_compile_info(l);
 }
 
