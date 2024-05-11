@@ -123,6 +123,8 @@
 #include <wiretap/pcap-encap.h>
 
 static epan_t *g_epan;
+static gint proto_tls;
+
 #define init_done() (g_epan != NULL)
 
 struct ushark {
@@ -430,6 +432,9 @@ ushark_init()
     /* Load default settings */
     epan_load_settings();
 
+    proto_tls = proto_get_id_by_filter_name("tls");
+    ws_assert(proto_tls >= 0);
+
     /* Disable geo-ip (not needed) */
     ushark_set_pref("ip.use_geoip", "false");
     ushark_set_pref("ipv6.use_geoip", "false");
@@ -509,10 +514,13 @@ ushark_destroy(ushark_t *sk)
     wtap_close(sk->cfile.provider.wth);
 }
 
+#include <epan/dissectors/packet-tls-utils.h>
+#include <epan/proto_data.h>
+
 // from tshark
 static gboolean
 process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, gint64 offset,
-                wtap_rec *rec, Buffer *buf, guint tap_flags)
+                wtap_rec *rec, Buffer *buf, guint tap_flags, ushark_tls_data_callback tls_cb)
 {
     frame_data      fdata;
     gboolean        passed;
@@ -561,13 +569,30 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
     if (passed) {
         frame_data_set_after_dissect(&fdata, &sk->fdata.cum_bytes);
 
-        // we want to return the JSON of each individual packet
-        g_string_truncate(sk->json_output, 0);
+        if (tls_cb) {
+            // TLS callback mode
+            SslPacketInfo *proto_data = (SslPacketInfo *) p_get_proto_data(wmem_file_scope(), &edt->pi, proto_tls, 0);
 
-        // print_packet(cf, edt);
-        write_json_proto_tree(sk->output_fields, TRUE /* print_dissections_expanded */,
+            if (proto_data) {
+                SslRecordInfo *record = proto_data->records;
+
+                while (record) {
+                    if ((proto_data->records->type == SSL_ID_APP_DATA) && (proto_data->records->data_len > 0))
+                        tls_cb(proto_data->records->plain_data, proto_data->records->data_len);
+
+                    record = record->next;
+                }
+            }
+        } else {
+            // JSON output mode
+            // we want to return the JSON of each individual packet
+            g_string_truncate(sk->json_output, 0);
+
+            // print_packet(cf, edt);
+            write_json_proto_tree(sk->output_fields, TRUE /* print_dissections_expanded */,
                         FALSE /* print_hex */, NULL /* protocolfilter */, PF_NONE /* protocolfilter_flags */,
                         edt, &cf->cinfo, proto_node_group_children_by_json_key /* --no-duplicate-keys */, &sk->jdumper);
+        }
 
         /* this must be set after print_packet() [bug #8160] */
         sk->fdata.prev_dis_frame = fdata;
@@ -585,8 +610,10 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
 }
 
 // returns true if packet was processed, false otherwise
-const char *
-ushark_dissect(ushark_t *sk, const u_char *pkt, const struct pcap_pkthdr *hdr)
+static gboolean
+ushark_dissect_internal(ushark_t *sk, const u_char *pkt,
+                const struct pcap_pkthdr *hdr,
+                ushark_tls_data_callback tls_cb)
 {
     // see capture_input_new_packets
     int err;
@@ -605,8 +632,22 @@ ushark_dissect(ushark_t *sk, const u_char *pkt, const struct pcap_pkthdr *hdr)
     gboolean ret = wtap_read(cf->provider.wth, &sk->rec, &sk->buf, &err, &err_info, &data_offset);
     ws_assert(ret);
 
-    if(process_packet_single_pass(sk, cf, edt, data_offset, &sk->rec, &sk->buf, TL_REQUIRES_NOTHING))
+    return process_packet_single_pass(sk, cf, edt, data_offset, &sk->rec, &sk->buf, TL_REQUIRES_NOTHING, tls_cb);
+}
+
+const char *
+ushark_dissect(ushark_t *sk, const u_char *pkt, const struct pcap_pkthdr *hdr)
+{
+
+    if(ushark_dissect_internal(sk, pkt, hdr, NULL))
         return sk->json_output->str;
 
     return NULL;
+}
+
+void ushark_dissect_tls(ushark_t *sk, const unsigned char *buf,
+                const struct pcap_pkthdr *hdr, ushark_tls_data_callback cb
+) {
+    if (cb)
+        ushark_dissect_internal(sk, buf, hdr, cb);
 }
