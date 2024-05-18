@@ -118,7 +118,11 @@
 /* ********************************************************** */
 
 #include "ushark.h"
+#ifdef HAVE_PCAP
 #include <pcap/pcap.h>
+#else
+#include "pcap.h"
+#endif
 #include <wiretap/wtap-int.h>
 #include <wiretap/pcap-encap.h>
 
