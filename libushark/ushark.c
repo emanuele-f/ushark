@@ -126,8 +126,13 @@
 #include <wiretap/wtap-int.h>
 #include <wiretap/pcap-encap.h>
 
+#include <epan/dissectors/packet-tls-utils.h>
+#include <epan/proto_data.h>
+#include "http2.h"
+
 static epan_t *g_epan;
 static gint proto_tls;
+static gint proto_http2;
 
 #define init_done() (g_epan != NULL)
 
@@ -140,6 +145,7 @@ struct ushark {
     json_dumper jdumper;
     GString *json_output;
     gint64 data_offset;
+    ushark_http2_ctx_t *http2_ctx;
 
     struct {
         const u_char *pkt;
@@ -438,6 +444,9 @@ ushark_init()
     proto_tls = proto_get_id_by_filter_name("tls");
     ws_assert(proto_tls >= 0);
 
+    proto_http2 = proto_get_id_by_filter_name("http2");
+    ws_assert(proto_http2 >= 0);
+
     /* Disable geo-ip (not needed) */
     ushark_set_pref("ip.use_geoip", "false");
     ushark_set_pref("ipv6.use_geoip", "false");
@@ -515,10 +524,10 @@ ushark_destroy(ushark_t *sk)
 
     // NOTE: wtap_close frees sk (wth->priv)
     wtap_close(sk->cfile.provider.wth);
-}
 
-#include <epan/dissectors/packet-tls-utils.h>
-#include <epan/proto_data.h>
+    if (sk->http2_ctx)
+        ushark_http2_cleanup(sk->http2_ctx);
+}
 
 // from tshark
 static gboolean
@@ -574,16 +583,26 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
 
         if (tls_cb) {
             // TLS callback mode
-            SslPacketInfo *proto_data = (SslPacketInfo *) p_get_proto_data(wmem_file_scope(), &edt->pi, proto_tls, 0);
+            conversation_t *conv = find_conversation_pinfo(&edt->pi, 0);
 
-            if (proto_data) {
-                SslRecordInfo *record = proto_data->records;
+            // If the flow is HTTP/2, then let wireshark process it, then reasseble
+            if (edt->tree && conv && conversation_get_proto_data(conv, proto_http2)) {
+                if (!sk->http2_ctx)
+                    sk->http2_ctx = ushark_http2_init();
 
-                while (record) {
-                    if ((proto_data->records->type == SSL_ID_APP_DATA) && (proto_data->records->data_len > 0))
-                        tls_cb(proto_data->records->plain_data, proto_data->records->data_len);
+                ushark_http2_process_data(sk->http2_ctx, edt, conv, tls_cb);
+            } else {
+                SslPacketInfo *proto_data = (SslPacketInfo *) p_get_proto_data(wmem_file_scope(), &edt->pi, proto_tls, 0);
 
-                    record = record->next;
+                if (proto_data) {
+                    SslRecordInfo *record = proto_data->records;
+
+                    while (record) {
+                        if ((proto_data->records->type == SSL_ID_APP_DATA) && (proto_data->records->data_len > 0))
+                            tls_cb(proto_data->records->plain_data, proto_data->records->data_len);
+
+                        record = record->next;
+                    }
                 }
             }
         } else {
