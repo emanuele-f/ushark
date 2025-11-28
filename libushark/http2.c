@@ -83,6 +83,8 @@ static void free_http2_reassembly(http2_reassembly_t *res) {
 
     if (res->headers_buf)
         free(res->headers_buf);
+
+    free(res);
 }
 
 static void
@@ -137,7 +139,7 @@ search_http2_data(proto_node *pn, gpointer data)
 
                 if (name_ptr && val_ptr && *name_ptr) {
                     size_t tot_len = name_finfo->length + 2 /*": "*/ + val_finfo->length + 2 /* \r\n */;
-                    char **buf_ptr;
+                    char **buf_ptr = NULL;
                     size_t *len_ptr;
 
                     if (*name_ptr == ':') {
@@ -164,7 +166,7 @@ search_http2_data(proto_node *pn, gpointer data)
                         len_ptr = &res->headers_buflen;
                     }
 
-                    *buf_ptr = realloc(*buf_ptr, *len_ptr + tot_len + 1 /* \0 */);
+                    *buf_ptr = realloc(*buf_ptr, *len_ptr + tot_len);
                     guint8 *p = (guint8*) *buf_ptr + *len_ptr;
                     memcpy(p, name_ptr, name_finfo->length); p += name_finfo->length;
                     *p++ = ':';
@@ -244,6 +246,9 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
           if (res->http2_hdrs.status) {
               // HTTP reply
               pre_headers_len = snprintf(tmp, sizeof(tmp), "HTTP/2.0 %s\r\n", res->http2_hdrs.status);
+              if (pre_headers_len >= sizeof(tmp))
+                  pre_headers_len = sizeof(tmp) - 1;
+
               pre_headers = tmp;
           } else if (res->http2_hdrs.method && res->http2_hdrs.authority) {
               pre_headers_len = snprintf(tmp, sizeof(tmp), "%s %s://%s%s HTTP/2.0\r\n",
@@ -251,6 +256,9 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
                   res->http2_hdrs.scheme ? res->http2_hdrs.scheme : "http",
                   res->http2_hdrs.authority,
                   res->http2_hdrs.path ? res->http2_hdrs.path : "/");
+              if (pre_headers_len >= sizeof(tmp))
+                  pre_headers_len = sizeof(tmp) - 1;
+
               pre_headers = tmp;
           } else {
               pre_headers = res->http2_hdrs.buf;

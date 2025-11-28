@@ -522,11 +522,11 @@ ushark_destroy(ushark_t *sk)
     if(sk->cfile.dfcode)
         dfilter_free(sk->cfile.dfcode);
 
-    // NOTE: wtap_close frees sk (wth->priv)
-    wtap_close(sk->cfile.provider.wth);
-
     if (sk->http2_ctx)
         ushark_http2_cleanup(sk->http2_ctx);
+
+    // NOTE: wtap_close frees sk (wth->priv)
+    wtap_close(sk->cfile.provider.wth);
 }
 
 // from tshark
