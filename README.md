@@ -52,9 +52,14 @@ git checkout 85a9e05c
 sed -E -i 's/option\(BUILD_(.*) ON\)/option\(BUILD_\1 OFF\)/g' CMakeOptions.txt
 sed -E -i 's/option\(ENABLE_(.*) ON\)/option\(ENABLE_\1 OFF\)/g' CMakeOptions.txt
 
+# NOTE: this requires Python 3.12 or less. On Python 3.13+, you need to patch cmake/modules/LocatePythonModule.cmake
+# to use importlib instead of of the remmoved "imp" module:
+#   "import importlib.util; spec = importlib.util.find_spec('${module}'); print(spec.origin if spec else '')"
+
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_STATIC=ON -DENABLE_WERROR=ON\
+	-DCMAKE_C_FLAGS="-Wno-error=clobbered" -DCMAKE_CXX_FLAGS="-Wno-error=clobbered"\
 	-DENABLE_ZLIB=ON -DENABLE_LZ4=ON -DENABLE_BROTLI=ON -DENABLE_ZSTD=ON\
 	-DENABLE_NGHTTP2=ON -DENABLE_GNUTLS=ON -DBUILD_tshark=ON ..
 
