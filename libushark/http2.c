@@ -238,28 +238,32 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
   // NOTE: body_buf will be invalidated on next run, so check explicitly
   if (res->body_buf || res->end_stream) {
       // Complete reassembly
-      char tmp[512];
       char *pre_headers = NULL;
+      char *tmp_buf = NULL;
       size_t pre_headers_len = 0;
 
       if (res->http2_hdrs.buf) {
           if (res->http2_hdrs.status) {
               // HTTP reply
-              pre_headers_len = snprintf(tmp, sizeof(tmp), "HTTP/2.0 %s\r\n", res->http2_hdrs.status);
-              if (pre_headers_len >= sizeof(tmp))
-                  pre_headers_len = sizeof(tmp) - 1;
+              int rv = asprintf(&tmp_buf, "HTTP/2.0 %s\r\n", res->http2_hdrs.status);
 
-              pre_headers = tmp;
+              if (rv > 0) {
+                  pre_headers_len = rv;
+                  pre_headers = tmp_buf;
+              } else
+                  pre_headers_len = 0;
           } else if (res->http2_hdrs.method && res->http2_hdrs.authority) {
-              pre_headers_len = snprintf(tmp, sizeof(tmp), "%s %s://%s%s HTTP/2.0\r\n",
+              int rv = asprintf(&tmp_buf, "%s %s://%s%s HTTP/2.0\r\n",
                   res->http2_hdrs.method,
                   res->http2_hdrs.scheme ? res->http2_hdrs.scheme : "http",
                   res->http2_hdrs.authority,
                   res->http2_hdrs.path ? res->http2_hdrs.path : "/");
-              if (pre_headers_len >= sizeof(tmp))
-                  pre_headers_len = sizeof(tmp) - 1;
 
-              pre_headers = tmp;
+              if (rv > 0) {
+                  pre_headers_len = rv;
+                  pre_headers = tmp_buf;
+              } else
+                  pre_headers_len = 0;
           } else {
               pre_headers = res->http2_hdrs.buf;
               pre_headers_len = res->http2_hdrs.buflen;
@@ -290,6 +294,9 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
               memcpy(p, res->body_buf, res->body_buflen);
               p += res->body_buflen;
           }
+
+          if (tmp_buf)
+              free(tmp_buf);
 
           tls_cb(assembly, tot_size);
           free(assembly);
