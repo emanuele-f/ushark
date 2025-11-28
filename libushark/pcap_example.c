@@ -59,6 +59,7 @@ int main(int argc, char **argv) {
         {"file",           required_argument, 0, 'f'},
         {"display-filter", required_argument, 0, 'd'},
         {"keylog",         required_argument, 0, 'k'},
+        {"http2",          no_argument,       0, '2'},
         {"help",           no_argument,       0, 'h'},
         {0, 0, 0, 0}
     };
