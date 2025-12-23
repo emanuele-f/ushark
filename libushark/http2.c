@@ -47,17 +47,20 @@ typedef struct {
     const guint8* body_buf;       // unmanaged
     size_t body_buflen;
 
+    const guint8* data_buf;       // unmanaged
+    size_t data_buflen;
+
     bool end_stream;
 } http2_reassembly_t;
 
 typedef enum {
     HTTP2_LVL_ROOT = 0,           // http2
     HTTP2_LVL_STREAM = 1,         // http2.stream
-    HTTP2_LVL_HEADERS_BODY = 2,   // http2.header / http2.body.fragments
+    HTTP2_LVL_HEADERS_BODY = 2,   // http2.header / http2.body.fragments / http2.data.data
 } http2_search_lvl;
 
 typedef struct {
-    // http2 -> http2.stream -> http2.header / http2.body.fragments
+    // http2 -> http2.stream -> http2.header / http2.body.fragments / http2.data.data
     http2_search_lvl cur_lvl;
     http2_reassembly_t *results;
 } http2_tree_search_t;
@@ -178,6 +181,7 @@ search_http2_data(proto_node *pn, gpointer data)
                 }
             }
         } else if (!res->body_buf && (strcmp(node_key, "http2.body.fragments") == 0)) {
+            // Multi-frame body: look for reassembled data
             proto_node *reassembled_body = NULL;
 
             proto_tree_children_foreach(pn, extract_http2_reassembled_body, &reassembled_body);
@@ -190,7 +194,18 @@ search_http2_data(proto_node *pn, gpointer data)
                     res->body_buflen = finfo->length;
                 }
             }
-        } else if (!res->end_stream && (strcmp(node_key, "http2.flags") == 0)) {
+        } else if (!res->data_buf && (strcmp(node_key, "http2.data.data") == 0)) {
+            // Single-frame body: use the DATA frame payload directly
+            field_info *finfo = pn->finfo;
+            const guint8 *body_ptr = tvb_get_ptr(finfo->ds_tvb, finfo->start, finfo->length);
+
+            // NOTE: using a separate field from body_buf to avoid duplicating or having
+            // partial data when both fragments and non-fragments data are present
+            if (body_ptr) {
+                res->data_buf = body_ptr;
+                res->data_buflen = finfo->length;
+            }
+        } else if ((strcmp(node_key, "http2.flags") == 0)) {
             uint8_t flags = fvalue_get_uinteger(&pn->finfo->value);
 
             if (flags & 0x01) // HTTP2_FLAGS_END_STREAM
@@ -233,14 +248,20 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
 
   http2_tree_search_t ts = {};
   ts.results = res;
+
   proto_tree_children_foreach(edt->tree, search_http2_data, &ts);
 
   // NOTE: body_buf will be invalidated on next run, so check explicitly
-  if (res->body_buf || res->end_stream) {
+  if (res->end_stream) {
       // Complete reassembly
       char *pre_headers = NULL;
       char *tmp_buf = NULL;
       size_t pre_headers_len = 0;
+
+      if (!res->body_buf) {
+          res->body_buf = res->data_buf;
+          res->body_buflen = res->data_buflen;
+      }
 
       if (res->http2_hdrs.buf) {
           if (res->http2_hdrs.status) {
@@ -295,14 +316,16 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
               p += res->body_buflen;
           }
 
-          if (tmp_buf)
-              free(tmp_buf);
-
           tls_cb(assembly, tot_size);
+
           free(assembly);
       } else if (res->body_buflen > 0)
           tls_cb(res->body_buf, res->body_buflen);
 
+      if (tmp_buf)
+        free(tmp_buf);
+
       g_hash_table_remove(ctx->reassembly_hash, GUINT_TO_POINTER(reassembly_key));
-  }
+  } else
+      res->end_stream = false;
 }
