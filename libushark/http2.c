@@ -63,6 +63,7 @@ typedef struct {
     // http2 -> http2.stream -> http2.header / http2.body.fragments / http2.data.data
     http2_search_lvl cur_lvl;
     http2_reassembly_t *results;
+    ushark_tls_data_callback tls_cb;
 } http2_tree_search_t;
 
 typedef struct {
@@ -130,6 +131,15 @@ search_http2_data(proto_node *pn, gpointer data)
         go_deeper = (strcmp(node_key, "http2.stream") == 0);
     } else { // HTTP2_LVL_HEADERS_BODY
         if (strcmp(node_key, "http2.header") == 0) {
+            // in some cases there can be [DATA] blocks before [HEADERS]
+            // which are related to the previous request
+            if (res->body_buflen > 0)
+                ts->tls_cb(res->body_buf, res->body_buflen);
+            else if (res->data_buflen > 0)
+                ts->tls_cb(res->data_buf, res->data_buflen);
+            res->body_buf = res->data_buf = NULL;
+            res->body_buflen = res->data_buflen = 0;
+
             http2_hdr_info hinfo = {};
             proto_tree_children_foreach(pn, extract_http2_header, &hinfo);
 
@@ -247,6 +257,7 @@ void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, con
   }
 
   http2_tree_search_t ts = {};
+  ts.tls_cb = tls_cb;
   ts.results = res;
 
   proto_tree_children_foreach(edt->tree, search_http2_data, &ts);
