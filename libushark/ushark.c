@@ -598,8 +598,8 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
                     SslRecordInfo *record = proto_data->records;
 
                     while (record) {
-                        if ((proto_data->records->type == SSL_ID_APP_DATA) && (proto_data->records->data_len > 0))
-                            tls_cb(proto_data->records->plain_data, proto_data->records->data_len);
+                        if ((record->type == SSL_ID_APP_DATA) && (record->data_len > 0))
+                            tls_cb(record->plain_data, record->data_len);
 
                         record = record->next;
                     }
