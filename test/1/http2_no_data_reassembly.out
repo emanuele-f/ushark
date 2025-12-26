@@ -1,0 +1,169 @@
+-----------------------
+POST https://idb.iubenda.com/csdata?db=hits1 HTTP/2.0
+content-length: 45
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain;charset=UTF-8
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+hits,cp=23960187,uiv=1,pv_nocs=1,sf=1 value=1
+-----------------------
+HTTP/2.0 204
+date: Wed, 26 Nov 2025 20:34:04 GMT
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 967785
+cdn-requestcountrycode: IT
+access-control-allow-credentials: true
+access-control-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods: GET, POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 1728000
+cache-control: public, max-age=0
+x-influxdb-build: OSS
+x-influxdb-version: v2.7.12
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 204
+cdn-cachedat: 11/26/2025 20:34:04
+cdn-edgestorageid: 1202
+cdn-requestid: 5900c1413ecf4e4b1a3c4c5bb1918483
+cdn-requesttime: 0
+
+
+-----------------------
+POST https://idb.iubenda.com/csdata?db=hits1 HTTP/2.0
+content-length: 50
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain;charset=UTF-8
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+hits,cp=23960187,uiv=1,cg=1,cg_a=1,cg_ba=1 value=1
+-----------------------
+POST https://cpl.iubenda.com/big_data/consent?apikey=oCBkKyN8NdxQyYX9VUnj2y90FGAIo0cN HTTP/2.0
+content-length: 11266
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+{"scoped_id":"2025/11/26/20/34/09/655/88c37c","legal_notices":[{"identifier":"cookie_policy"}],"preferences":{"consent":true,"tcfv2":"CQbfp4AQbfp4AB7FuBITCGFsAP_AAAAAAAAALxtR_G__bXlr-bb36ftkeYxf9_hr7sQxBgbJk24FzLvW7JwX32E7NAzatqYKmRIAu3TBIQNlHJDURVCgKIgFrzDMaEyUoTtKJ6BkiFMRY2NYCFxvm4tjWQCY5vr99ld9mR-N7dr82dzyy6hnv3a9_-S1WJCdIYetDfv8ZBKT-9IE9_x8v4v4_N7pE2-eS1n_tGvp4j9-YvP_dBmxt-bSffzPn__rl_e7X__d_n37v94XX77_____f_-7___2b4LeQFQAcADNAM-AjwBKoDtgIKARpAkQBJQCUYEyQKLAUcAqkBVkCsAFcwK-gWrAt4AMEg6gALgAoACoAFwAOAAeABAAC-AGQAagA8ACGAEwAKoAbwA_ACEgEMARIAjgBNACtAGAAMOAZQBlgDZAHPAO4A74B7AHxAPsA_QCAAEUgIuAjEBGgEcgJEAk0BPwFBgKgAq4BcwC9AGKANEAbQA3ABxAD2gIdgR6BIoCaQE7AKHAUeApEBTYC2AFwALkAXYAu8BeYDDYGRgZIAycBlwDMwGcwNXA1kBsYDaAG3gNzAbqA5MBy4DxwHxgP-AgIBBMCDAEIYIWghfBD0EPwI-gSKgkwCTIEswJbgS-AmABMsCZwE1QJsATcAnMBOkCdwE8IKDgoQBQsCioFJQKXAUyAp5BT8FQAKjAVKAqcBV0CtgFbwK-AWFAscBZUC00FrAWtAtyBcUdCIAAXABQAFQAOAAggBcAF8AMgA1AB4AEwAKYAVYAuAC6AGIAN4AfoBDAESAI4ATQAowBWgDAAGGAMoAaIA2QBzwDuAO-AewB8QD7AP2AigCMQEcASaAn4CgwFRAVcAsQBc4C8gL0AYoA2gBuIDiAOMAe0A-wCEAEOgInARfAj0CRQEyAJpATsAoeBR4FIAKTAU2AqwBYoC2AFugLgAXJAuwC7QF3gLzAX0Aw0Bj0DIwMkAZOAyqBlgGXAMzAZyA00BqsDVwNYAbQA28BuoDiwHJgOXAeOA-MB9YD7gH9gP-AgCBAQCDAELQIegR2Aj6BIQCRQEmQJVwSzBLQCXQEvgJgATLAmcBNUCbAE3AJwgTmAnTBO0E7gJ4ATzAoMBQgChYFEgKKgUlApcBTwCn4FRgKlAVOgq4CroFbAK3gWDAsmBZWC1gLWgW5At2BcUC44FyyED8ABYAFAAXAA1ACqAFwAMQAbwA_ADAAHPAO4A7wCKAEcAJSAUGAqICrgFzAMUAbQA4wCHQETgI9ATSApMBTYCrAFigLRAXAAuQBdgDIwGTgM5AaqA8cB8YD-wICAQYAhaBD0CQgEigJdATOAmwBOYCdwE8AJ5gUGAoqBSUClwFPwKlAVfAsEBa0C3JKCgAAsACgAHAAeABDACYAFUALgAYoBDAESAI4AUYArQBgADZAHeAPwAjkBUQFXALmAYoA4gCEAEOgIvgR6BIoCjwFJwKaApsBYoC2AFyALsAXnAyMDJAGTgMsAZyA1gBt4D4wIAgQEAgeBBgCEIEPQI-gSKAkqBKsCVoEugJfATOAmqBNgCbgE4QJzQTtBO4CeAE8wKKgUlApcBTwCowFSgKnAVsArfBYIFgwLFgWVAs9BawFrQLcgXIAuWUg4AALgAoACoAHAAQQAyADQAHgAQwAmABVADEAH6AQwBEgCOAFGAK0AYAAygBogDZAHOAO-AfYB-gEWAIxARwBJQCgwFRAVcAuYBeQDFAG0ANxAcQBxgD2gH2AQ6AicBF8CPQJFATSAnYBQ4CkAFJwKaApsBVgCxQFsALgAXJAuwC7QF5gL6AYbAyMDJAGTwMsAy4BnMDWANZAbeA3UByYDxQHjgPjAf2A_4CAgEEwIMAQhAhaBDMCHIEdgI-gSKgkwCTIEqwJZgS6Al8BMACZYEzgJqgTYAnNBO0E7gJ4ATzAoWBRUCkoFLgKeAU_AqMBUoCpwFbAK3gWCAsKBYsCyYFlQLPQWsBa0C3IFxQLkFgSAAD4AMAAyACKAFQAWQA1ADeAIQAhgBFACQAFcAL4AbAA_gCkAGAAMsAcAA7gCOAEiAKKAU0AuwBegDCAGNAM4AacA5oB1QD0AH2AQKAg8BHoCYgE2gJ3gUOBRECmgKbAVZAsQCyAFnALRAWwAuABdgC7gF-gMAAYOAwwBh4DHwGQgMrAZmAz8BoUDRQNGAamA1oBsADY4G1AbWA3ABugDfgHHAOWAdaA7iB3YHeQO_A8IB44D3gH0wQEBAUCC4EMAIcAQ9AiaBFECLIEcgI9QR_BIICTgErQJZATKAmbBNgE2YJtgm6BOMCcwE7gJ4ATyAntBPwE_QJ_gUBAoeBRECiYFFwKMgUgApIBSYClwFNgKcAU_AqEBUcCpQFVgKtQVeBV-CsIKxgVmArdBXAFcQLCgWJAsgBZQCywFmALOAWeAtGBaeC1oLXQWzBbQC3IFuwLnAXUAuyBd0C8IAAA","gac":"1~1584.48131.3188.39531.1964.1765.3272.28031.3253.3194.2008.1040.2090.1268.3043.1152.2177.1716.2501.3185.1284.2822.2929.2493.2997.1577.2900.2614.2645.3053.3217.43.2681.34631.46.1375.2657.931.55.13632.2124.1290.2222.2923.1188.1845.2629.574.2893.3150.29631.43831.938.2817.1678.2532.70.3211.2801.1421.1929.3231.2658.3307.2670.2884.5231.3270.3210.1732.2831.1750.2646.1301.2577.83.2140.61.2875.587.2488.1143.93.10231.2003.23031.3300.21233.2608.2931.2813.864.2852.2526.3190.3226.2387.14332.3250.1987.16831.2109.3296.39131.3117.2064.2862.3145.1843.108.3315.2867.3017.1099.2605.36831.47232.1166.2865.3112.3167.122.1878.1329.2886.124.2973.2370.2107.3016.1838.2898.2535.1516.3034.3126.3009.4631.1703.135.3215.2895.1097.3119.1252.3066.2335.2772.143.2941.144.11531.9731.2963.147.2405.3731.2897.2563.1345.2130.2103.2253.550.14133.2596.2833.159.2849.2983.3172.2787.1525.41131.2642.2133.2571.50831.2839.2964.3230.2816.117.2669.15731.27731.1659.2425.2687.311.2805.1786.1712.3109.3073.3076.1276.820.34231.2812.2047.192.2147.1880.2881.3314.196.2316.1548.1963.1782.3059.1495.2440.3097.2918.2328.2981.211.3106.1810.2985.2713.2275.11031.2834.2947.1215.3074.2584.2922.3018.3316.1840.3090.228.3238.1978.230.2472.3154.2564.1745.2072.2166.2850.2792.2821.1540.2219.2876.2767.1832.239.3227.2965.3257.3245.3292.3028.149.1677.45931.7831.49431.2282.4131.1162.259.3228.266.2279.2739.2878.2994.3831.1969.43731.2827.1583.2213.2225.2860.2039.3173.2633.2510.1968.2986.2186.3183.1455.4831.2575.3052.1003.10631.3095.286.3309.2684.1616.1135.7235.3209.3182.1423.1230.3214.1403.291.2661.839.2830.2411.802.3235.2027.2979.1667.2882.1962.2336.1312.3260.2414.40632.2468.1067.3318.1095.3005.2568.2909.523.568.1603.1027.2956.436.2889.2205.2908.1416.3223.33931.320.89.3331.322.16931.32531.3187.2968.3135.591.576.2846.2376.1053.327.3093.28831.3531.2975.3328.1651.1653.2888.3196.1827.1031.2917.1825.1449.3075.2610.2604.2517.3184.1570.2612.2880.1205.1051.2477.3019.2916.2583.3330.1942.3127.2891.3288.922.25931.2980.27831.3063.2325.1682.2552.2135.2484.367.2621.1859.2068.1186.2927.3099.1356.2768.2115.3236.2322.3128.3100.4731.371.3008.2609.3237.3281.1699.2359.1725.2961.385.6931.3290.3306.3038.8931.2377.2987.3136.2407.394.2447.3225.1967.2628.899.3055.2958.2844.1415.2838.2569.2940.407.2498.3163.415.47531.2854.3077.2966.737.2527.2358.1721.2035.3299.2643.49332.2403.430.2216.1870.959.2949.979.1046.3003.2652.4531.25131.3244.14237.445.2572.2354.2636.2234.2137.1307.2995.3094.2542.2901.1270.2312.3070.26631.2400.3012.2052.10831.424.2627.2567.7931.2791.26831.2930.3151.1149.2714.2656.2088.1985.2650.1579.3130.2874.3189.13731.14034.1944.1842.1109.3058.2950.2770.2869.985.2729.41531.904.486.3002.1227.3089.540.491.2056.803.43631.1558.1107.2798.495.494.2920.2695.2461.2156.2887.2220.3240.2416.3234.1697.3251.49231.2651.2690.3010.2343.26031.2465.2894.2677.3222.3068.1800.522.981.1917.1512.1092.1889.3000.584.2486.28731.1638.2418.2999.2309.2698.2863.3324.2784.2074.1440.1555.1226.3293.323.2331.3155.2883.2660.560"},"proofs":[{"content":"{\"timestamp\":\"2025-11-26T20:34:09.655Z\",\"version\":\"1.88.0\",\"consent\":true,\"id\":23960187}","form":"<div class=\"iubenda-cs-container\">\n                   <div class=\"iubenda-cs-content\" style=\"\">\n                     <div class=\"iubenda-cs-rationale\">\n                       <button type=\"button\" class=\"iubenda-cs-close-btn\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" style=\"display:none!important;border-radius:55px!important;border:1px solid #777!important;font-size:16px!important;font-weight:700!important;padding:10px 20px!important;height:34px!important;color:#666!important;visibility:visible\">Continua senza accettare</button>\n                       <div class=\"iubenda-banner-content iubenda-custom-content\" role=\"document\">\n                      <style>\n                        .btn-underline button { text-decoration: underline;}\n                      </style>\n                      <div>\n                        <div class=\"iubenda-cs-header\">\n                          <img src=\"https://www.repstatic.it/cless/common/widget/cookie-wall/2022-v1/img/repubblica/logo.svg\">\n                          <span class=\"iubenda-claim\">\n                            powered by <img src=\"https://www.repstatic.it/cless/common/widget/cookie-wall/2022-v1/img/common/iubenda-logo.svg\" alt=\"Iubenda Logo\" class=\"iubenda-logo\">\n                          </span>\n                        </div>\n                        <strong>I ricavi ottenuti dalla pubblicit.. personalizzata ci aiutano a supportare il lavoro della \n                        nostra redazione che si impegna a fornirti ogni giorno una informazione di qualit...</strong> \n                        Per questo chiediamo il tuo consenso all'utilizzo di cookie o tecnologie simili per finalit.. \n                        diverse da quelle strettamente necessarie, come specificato nella <a href=\"https://www.repubblica.it/corporate/privacy/repubblica/cookie-policy.html\" target=\"_blank\">Cookie Policy</a>. <br>\n                        Sei libero di rifiutare o revocare il consenso in qualsiasi momento, accedendo al <a class=\"btn-underline\"><button class=\"iubenda-advertising-preferences-link\">pannello delle preferenze pubblicitarie</button></a>;\n                        in tal caso, ti chiederemo di acquistare uno dei nostri abbonamenti. Il pannello delle preferenze pubblicitarie\n                        .. sempre raggiungibile dal footer del sito, cliccando su \"Gestione Cookie\".\n                      </div>\n                      <div class=\"iubenda-cs-opt-group\" style=\"color:#000!important\">\n                        <div class=\"iubenda-cs-opt-group-consent\">\n                          <button class=\"iubenda-cs-reject-btn iubenda-cs-btn-primary\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\">Rifiuta e abbonati</button>\n                          <button class=\"iubenda-cs-accept-btn iubenda-cs-btn-primary\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\">Accetta</button>\n                        </div>\n                      </div>\n                      <div class=\"iubenda-cs-login\">Sei gi.. abbonato? <a href=\"#\" id=\"iub_cmp_subscribe_custom_btn\">ACCEDI</a></div>\n                      <div class=\"iubenda-cs-footer\">\n                        Cliccando su Accetta, autorizzi l...utilizzo di tutti i cookie di profilazione indicati nella \n                        <a href=\"https://www.repubblica.it/corporate/privacy/repubblica/cookie-policy.html\" target=\"_blank\">Cookie Policy</a> e potrai navigare sul nostro sito, \n                        con accesso a tutti i titoli degli articoli pubblicati, al contenuto degli articoli non Premium e ai video.<br>\n                        Se accetti l...uso di tutti i cookie di profilazione, noi e 1071 <a class=\"btn-underline\"><button class=\"iubenda-vendor-list-link\" data-iub-enabled=\"1\">terze parti</button></a> selezionate potremo \n                        archiviare e/o accedere a informazioni sul tuo dispositivo e trattare i tuoi dati personali - \n                        inclusi dati di geolocalizzazione precisi e identificazione attraverso la scansione del dispositivo - per \n                        finalit.. di profilazione attraverso le seguenti attivit..: pubblicit.. e contenuti personalizzati, \n                        misurazione delle prestazioni dei contenuti e degli annunci, ricerche sul pubblico, sviluppo di servizi.<br>\n                         \n                        Accedendo al <a class=\"btn-underline\"><button class=\"iubenda-advertising-preferences-link\">pannello delle preferenze pubblicitarie</button></a>, potrai invece selezionare le singole finalit.. connesse \n                        con la profilazione. In caso di rifiuto di una o pi.. finalit.. richieste per l...accesso ai nostri servizi \n                        senza abbonamento e contraddistinte mediante asterisco nella <a href=\"https://www.repubblica.it/corporate/privacy/repubblica/cookie-policy.html\" target=\"_blank\">Cookie Policy</a>, \n                        potrai fruire dei servizi solo acquistando uno dei nostri abbonamenti, incluso l...abbonamento Base \n                        che ti offre un servizio equivalente a quello ottenibile accettando i cookie di profilazione. \n                        <br>\n                        <br>\n                      </div></div>\n                       <div class=\"iubenda-cs-counter\" style=\"display:none\">Premi ancora per continuare 0/1</div>\n                     </div>\n                   </div>\n                 </div>"}],"page_url":"https://www.repubblica.it/"}
+-----------------------
+HTTP/2.0 204
+date: Wed, 26 Nov 2025 20:34:09 GMT
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 967785
+cdn-requestcountrycode: IT
+access-control-allow-credentials: true
+access-control-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods: GET, POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 1728000
+cache-control: public, max-age=0
+x-influxdb-build: OSS
+x-influxdb-version: v2.7.12
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 204
+cdn-cachedat: 11/26/2025 20:34:09
+cdn-edgestorageid: 1202
+cdn-requestid: 1738a31405d702bc2154f36facee5c2f
+cdn-requesttime: 0
+
+
+-----------------------
+HTTP/2.0 201
+date: Wed, 26 Nov 2025 20:34:09 GMT
+content-type: text/plain; charset=utf-8
+vary: Accept-Encoding
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 2123743
+cdn-requestcountrycode: IT
+access-control-allow-origin: *
+cache-control: public, max-age=0
+content-encoding: gzip
+x-request-id: a6e0de807cec3d06b61ebd457aba3979
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 201
+cdn-cachedat: 11/26/2025 20:34:09
+cdn-edgestorageid: 1202
+cdn-requestid: c851480d7fc5252b2c4eb1cfc3211248
+cdn-requesttime: 0
+
+..........3202.74.72.72.76.7..735...H66O..TL......
+-----------------------
+POST https://idb.iubenda.com/csdata?db=hits1 HTTP/2.0
+content-length: 50
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain;charset=UTF-8
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/embed/esteri/2025/11/26/video/hong_kong_le_eccezionali_immagini_aeree_dellincendio_dei_grattacieli-425006831/?adref=boxHomeRep-Live&opp=bl&generation=pageload&width=233&height=132&gd-facet-webview=false&el=player_ex_425006831&bcplayer=true&autostart=true&vpa=auto&wpm&type=sticky&pageWithPaywall=0&w_t_pagehref=https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+hits,cp=23960187,uiv=1,pv_cs=1,cg_a=1,sf=1 value=1
+-----------------------
+HTTP/2.0 204
+date: Wed, 26 Nov 2025 20:34:10 GMT
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 967785
+cdn-requestcountrycode: IT
+access-control-allow-credentials: true
+access-control-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods: GET, POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 1728000
+cache-control: public, max-age=0
+x-influxdb-build: OSS
+x-influxdb-version: v2.7.12
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 204
+cdn-cachedat: 11/26/2025 20:34:10
+cdn-edgestorageid: 1202
+cdn-requestid: 2ef6354952ec477b8203851ac654d2e1
+cdn-requesttime: 0
+
