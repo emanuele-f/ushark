@@ -145,6 +145,8 @@ struct ushark {
     json_dumper jdumper;
     GString *json_output;
     gint64 data_offset;
+    ushark_data_callbacks_t callbacks;
+    bool callback_mode;
     ushark_http2_ctx_t *http2_ctx;
 
     struct {
@@ -532,7 +534,7 @@ ushark_destroy(ushark_t *sk)
 // from tshark
 static gboolean
 process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, gint64 offset,
-                wtap_rec *rec, Buffer *buf, guint tap_flags, ushark_tls_data_callback tls_cb)
+                wtap_rec *rec, Buffer *buf, guint tap_flags)
 {
     frame_data      fdata;
     gboolean        passed;
@@ -581,7 +583,7 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
     if (passed) {
         frame_data_set_after_dissect(&fdata, &sk->fdata.cum_bytes);
 
-        if (tls_cb) {
+        if (sk->callback_mode) {
             // TLS callback mode
             conversation_t *conv = find_conversation_pinfo(&edt->pi, 0);
 
@@ -590,16 +592,16 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
                 if (!sk->http2_ctx)
                     sk->http2_ctx = ushark_http2_init();
 
-                ushark_http2_process_data(sk->http2_ctx, edt, conv, tls_cb);
+                ushark_http2_process_data(sk->http2_ctx, edt, conv, &sk->callbacks);
             } else {
                 SslPacketInfo *proto_data = (SslPacketInfo *) p_get_proto_data(wmem_file_scope(), &edt->pi, proto_tls, 0);
 
-                if (proto_data) {
+                if (proto_data && sk->callbacks.on_http1_data) {
                     SslRecordInfo *record = proto_data->records;
 
                     while (record) {
                         if ((record->type == SSL_ID_APP_DATA) && (record->data_len > 0))
-                            tls_cb(record->plain_data, record->data_len);
+                            sk->callbacks.on_http1_data(conv->conv_index, record->plain_data, record->data_len);
 
                         record = record->next;
                     }
@@ -631,11 +633,8 @@ process_packet_single_pass(ushark_t *sk, capture_file *cf, epan_dissect_t *edt, 
     return passed;
 }
 
-// returns true if packet was processed, false otherwise
-static gboolean
-ushark_dissect_internal(ushark_t *sk, const u_char *pkt,
-                const struct pcap_pkthdr *hdr,
-                ushark_tls_data_callback tls_cb)
+const char*
+ushark_dissect(ushark_t *sk, const u_char *pkt, const struct pcap_pkthdr *hdr)
 {
     // see capture_input_new_packets
     int err;
@@ -654,22 +653,15 @@ ushark_dissect_internal(ushark_t *sk, const u_char *pkt,
     gboolean ret = wtap_read(cf->provider.wth, &sk->rec, &sk->buf, &err, &err_info, &data_offset);
     ws_assert(ret);
 
-    return process_packet_single_pass(sk, cf, edt, data_offset, &sk->rec, &sk->buf, TL_REQUIRES_NOTHING, tls_cb);
+    gboolean success = process_packet_single_pass(sk, cf, edt, data_offset, &sk->rec, &sk->buf, TL_REQUIRES_NOTHING);
+    if (success && !sk->callback_mode)
+      return sk->json_output->str;
+    else
+      return NULL;
 }
 
-const char *
-ushark_dissect(ushark_t *sk, const u_char *pkt, const struct pcap_pkthdr *hdr)
+void ushark_set_callbacks(ushark_t *sk, const ushark_data_callbacks_t *cbs)
 {
-
-    if(ushark_dissect_internal(sk, pkt, hdr, NULL))
-        return sk->json_output->str;
-
-    return NULL;
-}
-
-void ushark_dissect_tls(ushark_t *sk, const unsigned char *buf,
-                const struct pcap_pkthdr *hdr, ushark_tls_data_callback cb
-) {
-    if (cb)
-        ushark_dissect_internal(sk, buf, hdr, cb);
+  sk->callbacks = *cbs;
+  sk->callback_mode = true;
 }

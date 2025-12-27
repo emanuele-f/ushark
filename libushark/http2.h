@@ -11,6 +11,6 @@ typedef struct ushark_http2_ctx ushark_http2_ctx_t;
 
 ushark_http2_ctx_t* ushark_http2_init();
 void ushark_http2_cleanup(ushark_http2_ctx_t *ctx);
-void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, conversation_t *conv, ushark_tls_data_callback tls_cb);
+void ushark_http2_process_data(ushark_http2_ctx_t *ctx, epan_dissect_t *edt, conversation_t *conv, const ushark_data_callbacks_t *cbs);
 
 #endif

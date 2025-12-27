@@ -7,9 +7,7 @@
 #include <pcap/pcap.h>
 #include "ushark.h"
 
-static bool http2_mode = false;
-
-static void tls_data_callback(const unsigned char *plain_data, unsigned int data_len) {
+static void print_data(const unsigned char *plain_data, size_t data_len) {
     if(plain_data) {
         unsigned char *buf = malloc(data_len);
         if (buf) {
@@ -21,21 +19,38 @@ static void tls_data_callback(const unsigned char *plain_data, unsigned int data
                     buf[i] = '.';
             }
 
-            printf("-----------------------\n%.*s\n", data_len, buf);
+            printf("-----------------------\n%.*s\n", (int) data_len, buf);
             free(buf);
         }
     }
 }
 
+static void handle_http1_data(uint32_t conversation_id, const unsigned char *plain_data, size_t data_len) {
+    printf("[HTTP1 conv:%u]\n", conversation_id);
+    print_data(plain_data, data_len);
+}
+
+static void handle_http2_request(uint32_t conversation_id, uint32_t stream_id, const unsigned char *plain_data, size_t data_len) {
+    printf("[HTTP2.REQ conv:%u stream:%u]\n", conversation_id, stream_id);
+    print_data(plain_data, data_len);
+}
+
+static void handle_http2_response(uint32_t conversation_id, uint32_t stream_id, const unsigned char *plain_data, size_t data_len) {
+    printf("[HTTP2.RES conv:%u stream:%u]\n", conversation_id, stream_id);
+    print_data(plain_data, data_len);
+}
+
+static void handle_http2_reset(uint32_t conversation_id, uint32_t stream_id) {
+    printf("[HTTP2.RST conv:%u steam:%u]\n", conversation_id, stream_id);
+    printf("-----------------------\n");
+}
+
 static void handle_pkt(u_char *user, const struct pcap_pkthdr *hdr, const u_char *buf) {
     ushark_t *sk = (ushark_t*) user;
 
-    if (!http2_mode) {
-        const char *json = ushark_dissect(sk, buf, hdr);
-        if(json)
-            puts(json);
-    } else
-        ushark_dissect_tls(sk, buf, hdr, tls_data_callback);
+    const char *json = ushark_dissect(sk, buf, hdr);
+    if(json)
+        puts(json);
 }
 
 static void print_usage(const char *progname) {
@@ -53,6 +68,7 @@ int main(int argc, char **argv) {
     char *pcap_path = NULL;
     char *dfilter = NULL;
     char *keylog_path = NULL;
+    bool http2_mode = false;
     int opt;
 
     static struct option long_options[] = {
@@ -105,6 +121,18 @@ int main(int argc, char **argv) {
         ushark_set_pref("tls.keylog_file", keylog_path);
 
     ushark_t *sk = ushark_new(pcap_datalink(pd), dfilter);
+    
+    if (http2_mode) {
+        ushark_data_callbacks_t cbs = {
+          .on_http1_data = handle_http1_data,
+          .on_http2_request = handle_http2_request,
+          .on_http2_response = handle_http2_response,
+          .on_http2_reset = handle_http2_reset,
+        };
+
+        ushark_set_callbacks(sk, &cbs);
+    }
+
     pcap_loop(pd, 0, handle_pkt, (u_char*)sk);
 
     ushark_destroy(sk);

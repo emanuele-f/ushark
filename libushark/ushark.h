@@ -13,9 +13,19 @@ USHARK_EXPORT void ushark_cleanup();
 USHARK_EXPORT ushark_t* ushark_new(int pcap_encap, const char *dfilter);
 USHARK_EXPORT void ushark_destroy(ushark_t *sk);
 USHARK_EXPORT void ushark_set_pref(const char *name, const char *val);
-USHARK_EXPORT const char* ushark_dissect(ushark_t *sk, const unsigned char *buf, const struct pcap_pkthdr *hdr);
 
-typedef void (*ushark_tls_data_callback)(const unsigned char *plain_data, unsigned int data_len);
-USHARK_EXPORT void ushark_dissect_tls(ushark_t *sk, const unsigned char *buf, const struct pcap_pkthdr *hdr, ushark_tls_data_callback cb);
+typedef struct {
+  void (*on_http1_data)(uint32_t conversation_id, const unsigned char *plain_data, size_t data_len);
+  void (*on_http2_request)(uint32_t conversation_id, uint32_t stream_id, const unsigned char *plain_data, size_t data_len);
+  void (*on_http2_response)(uint32_t conversation_id, uint32_t stream_id, const unsigned char *plain_data, size_t data_len);
+  void (*on_http2_reset)(uint32_t conversation_id, uint32_t stream_id);
+} ushark_data_callbacks_t;
+USHARK_EXPORT void ushark_set_callbacks(ushark_t *sk, const ushark_data_callbacks_t *cbs);
+
+/** @brief Dissect the HTTP data in the given buffer, possibly decrypting it via the keylog
+  * @return The dissected JSON if no callbacks are set, NULL otherwise
+  * @note the callbacks can be set via ushark_set_callbacks, which changes the operating mode
+  */
+USHARK_EXPORT const char* ushark_dissect(ushark_t *sk, const unsigned char *buf, const struct pcap_pkthdr *hdr);
 
 #endif
