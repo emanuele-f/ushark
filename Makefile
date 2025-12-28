@@ -1,4 +1,4 @@
-.PHONY: clean package test
+.PHONY: clean package libushark test
 
 build/Release/ushark.node: libushark/ushark.c libushark/ushark.h binding.gyp $(shell find bindings -type f)
 	node-gyp configure
@@ -9,6 +9,9 @@ package: clean
 	./node_modules/.bin/node-pre-gyp configure
 	./node_modules/.bin/node-pre-gyp build
 	./node_modules/.bin/node-pre-gyp package
+
+libushark:
+	$(MAKE) -C libushark
 
 clean:
 	$(MAKE) -C libushark clean
