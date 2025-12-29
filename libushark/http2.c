@@ -78,6 +78,22 @@ typedef struct {
     guint32 frame_type;
 } http2_stream_info_t;
 
+typedef struct {
+    guint32 conv_index;
+    guint32 stream_id;
+} http2_reassembly_key_t;
+
+static guint http2_reassembly_key_hash(gconstpointer v) {
+    const http2_reassembly_key_t *key = (const http2_reassembly_key_t*)v;
+    return key->conv_index ^ key->stream_id;
+}
+
+static gboolean http2_reassembly_key_equal(gconstpointer v1, gconstpointer v2) {
+    const http2_reassembly_key_t *key1 = (const http2_reassembly_key_t*)v1;
+    const http2_reassembly_key_t *key2 = (const http2_reassembly_key_t*)v2;
+    return key1->conv_index == key2->conv_index && key1->stream_id == key2->stream_id;
+}
+
 static void free_http2_reassembly(http2_reassembly_t *res) {
     if (res->http2_hdrs.method)
         free(res->http2_hdrs.method);
@@ -156,8 +172,10 @@ static unsigned char* reassemble_http2_message(http2_reassembly_t *res, size_t *
             if (rv > 0) {
                 pre_headers_len = rv;
                 pre_headers = tmp_buf;
-            } else
+            } else {
                 pre_headers_len = 0;
+                tmp_buf = NULL;
+            }
         } else if (res->http2_hdrs.method && res->http2_hdrs.authority) {
             int rv = asprintf(&tmp_buf, "%s %s://%s%s HTTP/2.0\r\n",
                 res->http2_hdrs.method,
@@ -168,8 +186,10 @@ static unsigned char* reassemble_http2_message(http2_reassembly_t *res, size_t *
             if (rv > 0) {
                 pre_headers_len = rv;
                 pre_headers = tmp_buf;
-            } else
+            } else {
                 pre_headers_len = 0;
+                tmp_buf = NULL;
+            }
         } else {
             pre_headers = res->http2_hdrs.buf;
             pre_headers_len = res->http2_hdrs.buflen;
@@ -265,7 +285,13 @@ static void process_http2_header(proto_node *pn, http2_reassembly_t *res, const 
     }
 
     // Append header to buffer
-    *buf_ptr = realloc(*buf_ptr, *len_ptr + tot_len);
+    char *new_buf = realloc(*buf_ptr, *len_ptr + tot_len);
+    if (!new_buf)
+        // Memory allocation failed - skip this header
+        return;
+
+    *buf_ptr = new_buf;
+
     guint8 *p = (guint8*) *buf_ptr + *len_ptr;
     memcpy(p, name_ptr, name_finfo->length); p += name_finfo->length;
     *p++ = ':';
@@ -289,19 +315,27 @@ static void process_http2_stream(proto_node *pn, http2_tree_search_t *ts) {
         if (ts->cbs->on_http2_reset)
             ts->cbs->on_http2_reset(ts->conv->conv_index, stream_info.stream_id);
 
-        guint32 reassembly_key = (ts->conv->conv_index << 10) | stream_info.stream_id;
-        g_hash_table_remove(ts->ctx->reassembly_hash, GUINT_TO_POINTER(reassembly_key));
+        http2_reassembly_key_t lookup_key = {
+            .conv_index = ts->conv->conv_index,
+            .stream_id = stream_info.stream_id
+        };
+        g_hash_table_remove(ts->ctx->reassembly_hash, &lookup_key);
         return;
     }
 
-    // Look up or create reassembly entry
-    guint32 reassembly_key = (ts->conv->conv_index << 10) | stream_info.stream_id;
+    http2_reassembly_key_t lookup_key = {
+        .conv_index = ts->conv->conv_index,
+        .stream_id = stream_info.stream_id
+    };
     http2_reassembly_t *stream_res = (http2_reassembly_t*)
-        g_hash_table_lookup(ts->ctx->reassembly_hash, GUINT_TO_POINTER(reassembly_key));
+        g_hash_table_lookup(ts->ctx->reassembly_hash, &lookup_key);
 
     if (!stream_res) {
         stream_res = calloc(1, sizeof(http2_reassembly_t));
-        g_hash_table_insert(ts->ctx->reassembly_hash, GUINT_TO_POINTER(reassembly_key), stream_res);
+
+        http2_reassembly_key_t *stored_key = g_new(http2_reassembly_key_t, 1);
+        *stored_key = lookup_key;
+        g_hash_table_insert(ts->ctx->reassembly_hash, stored_key, stream_res);
     }
 
     // Process this stream
@@ -337,7 +371,11 @@ static void process_http2_stream(proto_node *pn, http2_tree_search_t *ts) {
             }
         }
 
-        g_hash_table_remove(ts->ctx->reassembly_hash, GUINT_TO_POINTER(reassembly_key));
+        http2_reassembly_key_t removal_key = {
+            .conv_index = ts->conv->conv_index,
+            .stream_id = stream_info.stream_id
+        };
+        g_hash_table_remove(ts->ctx->reassembly_hash, &removal_key);
     }
 }
 
@@ -413,7 +451,11 @@ search_http2_data(proto_node *pn, gpointer data)
 ushark_http2_ctx_t* ushark_http2_init() {
   ushark_http2_ctx_t *ctx = (ushark_http2_ctx_t*) calloc(1, sizeof(ushark_http2_ctx_t));
 
-  ctx->reassembly_hash = g_hash_table_new_full(NULL, NULL, NULL, (GDestroyNotify)free_http2_reassembly);
+  ctx->reassembly_hash = g_hash_table_new_full(
+      http2_reassembly_key_hash,
+      http2_reassembly_key_equal,
+      g_free,
+      (GDestroyNotify)free_http2_reassembly);
 
   return ctx;
 }
