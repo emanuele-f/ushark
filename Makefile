@@ -1,4 +1,4 @@
-.PHONY: clean package libushark test
+.PHONY: clean package libushark run_tests
 
 build/Release/ushark.node: libushark/ushark.c libushark/ushark.h binding.gyp $(shell find bindings -type f)
 	node-gyp configure
@@ -17,6 +17,6 @@ clean:
 	$(MAKE) -C libushark clean
 	rm -rf build build-tmp-napi-v* lib
 
-test:
+run_tests:
 	$(MAKE) -C libushark pcap_example
-	./test/run_tests.sh
+	./tests/run_tests.sh
