@@ -1,0 +1,4 @@
+# LeakSanitizer suppressions file
+#
+# Ignore the leaks happening in wireshark
+leak:tvb_new

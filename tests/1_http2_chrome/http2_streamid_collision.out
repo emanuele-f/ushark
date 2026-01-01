@@ -1,0 +1,420 @@
+[HTTP2.REQ conv:1 stream:1]
+-----------------------
+GET https://oasjs.kataweb.it/adsetup_cmp.js?mapnode=responsive HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://www.repubblica.it/embed/esteri/2025/11/26/video/hong_kong_le_eccezionali_immagini_aeree_dellincendio_dei_grattacieli-425006831/?adref=boxHomeRep-Live&opp=bl&generation=pageload&width=233&height=132&gd-facet-webview=false&el=player_ex_425006831&bcplayer=true&autostart=true&vpa=auto&wpm&type=sticky&pageWithPaywall=0&w_t_pagehref=https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+
+
+[HTTP2.REQ conv:0 stream:1]
+-----------------------
+POST https://idb.iubenda.com/csdata?db=hits1 HTTP/2.0
+content-length: 50
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain;charset=UTF-8
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+686974732c63703d..2076616c75653d31
+
+[HTTP2.RES conv:0 stream:1]
+-----------------------
+HTTP/2.0 204
+date: Wed, 26 Nov 2025 20:34:38 GMT
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 967785
+cdn-requestcountrycode: IT
+access-control-allow-credentials: true
+access-control-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods: GET, POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 1728000
+cache-control: public, max-age=0
+x-influxdb-build: OSS
+x-influxdb-version: v2.7.12
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 204
+cdn-cachedat: 11/26/2025 20:34:38
+cdn-edgestorageid: 1202
+cdn-requestid: 03f033403332b1e241a64fa6ca7ce7e4
+cdn-requesttime: 0
+
+
+[HTTP2.RES conv:1 stream:1]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+vary: Accept-Encoding, gd-facet-webview, gd-facet2025-webview, x-lambdaedge-localauth
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+strict-transport-security: max-age=7200
+x-kw-expires: Tue, 31 Mar 1981 05:00:00 GMT
+cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+smaxagedone: yup
+x-kw-cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:38 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+x-cache: Miss from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: HxSZnnROqIRw3PNVJucezdnFY6IjOtH_ZppRaWK0i50EP7C_AiLtSg==
+
+1f8b080000000000..9dae4b0427410a00
+
+[HTTP2.REQ conv:1 stream:3]
+-----------------------
+GET https://oasjs.kataweb.it/adsetup.real.js?mapnode=responsivehp&ts=1764189278309 HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+
+
+[HTTP2.REQ conv:1 stream:5]
+-----------------------
+GET https://oasjs.kataweb.it/adsetup.real.js?mapnode=responsive&ts=1764189278353 HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://www.repubblica.it/embed/esteri/2025/11/26/video/hong_kong_le_eccezionali_immagini_aeree_dellincendio_dei_grattacieli-425006831/?adref=boxHomeRep-Live&opp=bl&generation=pageload&width=233&height=132&gd-facet-webview=false&el=player_ex_425006831&bcplayer=true&autostart=true&vpa=auto&wpm&type=sticky&pageWithPaywall=0&w_t_pagehref=https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+
+
+[HTTP2.RES conv:1 stream:3]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+vary: Referer,Accept-Encoding, gd-facet-webview, gd-facet2025-webview, x-lambdaedge-localauth
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+strict-transport-security: max-age=7200
+x-kw-expires: Tue, 31 Mar 1981 05:00:00 GMT
+cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+smaxagedone: yup
+x-kw-cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:38 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+x-cache: Miss from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: 3HnZ2W6tvT4m8rQm0BBd_QCqwv1Pvgd26Ek8pfhVCKWdK4beBR2pDQ==
+
+1f8b080000000000..5756cfa092f10000
+
+[HTTP2.RES conv:1 stream:5]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+vary: Referer,Accept-Encoding, gd-facet-webview, gd-facet2025-webview, x-lambdaedge-localauth
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+strict-transport-security: max-age=7200
+x-kw-expires: Tue, 31 Mar 1981 05:00:00 GMT
+cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+smaxagedone: yup
+x-kw-cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:38 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+x-cache: Miss from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: 4ol_Kgj_ugXxRqTMU7HzEkuPbU1w-KojdjeeIKhaTBTOmRg55I6X3g==
+
+1f8b080000000000..c993d6208d530100
+
+[HTTP2.REQ conv:0 stream:3]
+-----------------------
+POST https://idb.iubenda.com/csdata?db=hits1 HTTP/2.0
+content-length: 50
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain;charset=UTF-8
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/embed/esteri/2025/11/26/video/hong_kong_le_eccezionali_immagini_aeree_dellincendio_dei_grattacieli-425006831/?adref=boxHomeRep-Live&opp=bl&generation=pageload&width=233&height=132&gd-facet-webview=false&el=player_ex_425006831&bcplayer=true&autostart=true&vpa=auto&wpm&type=sticky&pageWithPaywall=0&w_t_pagehref=https://www.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+686974732c63703d..2076616c75653d31
+
+[HTTP2.RES conv:0 stream:3]
+-----------------------
+HTTP/2.0 204
+date: Wed, 26 Nov 2025 20:34:38 GMT
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 967785
+cdn-requestcountrycode: IT
+access-control-allow-credentials: true
+access-control-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods: GET, POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 1728000
+cache-control: public, max-age=0
+x-influxdb-build: OSS
+x-influxdb-version: v2.7.12
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 204
+cdn-cachedat: 11/26/2025 20:34:38
+cdn-edgestorageid: 1202
+cdn-requestid: 6bcf057e3f3815d730e39e4282d7eeab
+cdn-requesttime: 0
+
+
+[HTTP2.REQ conv:1 stream:7]
+-----------------------
+GET https://oasjs.kataweb.it/adsetup_cmp.js?mapnode=responsive HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://www.repubblica.it/esteri/2025/11/26/news/casa_bianca_militari_spari_washington-425006850/?ref=RHLF-BG-P1-S1-T1-k245
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+
+
+[HTTP2.RES conv:1 stream:7]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+vary: Accept-Encoding, gd-facet-webview, gd-facet2025-webview, x-lambdaedge-localauth
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+strict-transport-security: max-age=7200
+x-kw-expires: Tue, 31 Mar 1981 05:00:00 GMT
+cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+smaxagedone: yup
+x-kw-cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:39 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+x-cache: Miss from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: BiMtOH4f0WxHYq221PlcodQj35llHe-j6WkEOR8Ad7tO95OLKDllww==
+
+1f8b080000000000..b2ddc3f327410a00
+
+[HTTP2.REQ conv:1 stream:9]
+-----------------------
+GET https://tlh.gedidigital.it/alternative_config.js HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://shop.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1
+
+
+[HTTP2.REQ conv:1 stream:11]
+-----------------------
+GET https://tlh.gedidigital.it/tlh.js HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://shop.repubblica.it/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1
+
+
+[HTTP2.REQ conv:0 stream:5]
+-----------------------
+POST https://idb.iubenda.com/csdata?db=hits1 HTTP/2.0
+content-length: 50
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+content-type: text/plain;charset=UTF-8
+sec-ch-ua-mobile: ?1
+accept: */*
+origin: https://www.repubblica.it
+sec-fetch-site: cross-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: https://www.repubblica.it/esteri/2025/11/26/news/casa_bianca_militari_spari_washington-425006850/?ref=RHLF-BG-P1-S1-T1-k245
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: u=1, i
+
+686974732c63703d..2076616c75653d31
+
+[HTTP2.RES conv:1 stream:9]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-length: 5751
+expires: Wed, 26 Nov 2025 20:35:21 GMT
+x-cacheable: YES
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+strict-transport-security: max-age=7200
+x-kw-date: Wed, 26 Nov 2025 20:34:20 GMT
+x-kw-expires: Wed, 26 Nov 2025 20:35:21 GMT
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:20 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+vary: Accept-Encoding
+x-cache: Hit from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: PxyATrGR1jjaDuJkKEUAnXak4wZZj3moqGemJRUB4aavbeABq_7B1w==
+age: 19
+
+1f8b080000000000..1a28c2dd45420000
+
+[HTTP2.RES conv:0 stream:5]
+-----------------------
+HTTP/2.0 204
+date: Wed, 26 Nov 2025 20:34:39 GMT
+server: BunnyCDN-IT1-1202
+cdn-pullzone: 967785
+cdn-requestcountrycode: IT
+access-control-allow-credentials: true
+access-control-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods: GET, POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 1728000
+cache-control: public, max-age=0
+x-influxdb-build: OSS
+x-influxdb-version: v2.7.12
+strict-transport-security: max-age=31536000; includeSubDomains
+cdn-proxyver: 1.40
+cdn-requestpullsuccess: True
+cdn-requestpullcode: 204
+cdn-cachedat: 11/26/2025 20:34:39
+cdn-edgestorageid: 1202
+cdn-requestid: 136567102f86f078663d47892a09230b
+cdn-requesttime: 0
+
+
+[HTTP2.RES conv:1 stream:11]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+vary: Accept-Encoding, gd-facet-webview, gd-facet2025-webview, x-lambdaedge-localauth
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+strict-transport-security: max-age=7200
+x-kw-expires: Tue, 31 Mar 1981 05:00:00 GMT
+cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+smaxagedone: yup
+x-kw-cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:39 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+x-cache: Miss from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: _PBcPHvrEePIDe7DYkJ4nzVpg3B2yNi0QUIf2wUuiQWR05rD1gNeew==
+
+1f8b080000000000..e94bee5827410a00
+
+[HTTP2.REQ conv:1 stream:13]
+-----------------------
+GET https://oasjs.kataweb.it/adsetup.real.js?mapnode=responsive&ts=1764189279766 HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: */*
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+sec-fetch-storage-access: active
+referer: https://www.repubblica.it/esteri/2025/11/26/news/casa_bianca_militari_spari_washington-425006850/?ref=RHLF-BG-P1-S1-T1-k245
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+
+
+[HTTP2.RES conv:1 stream:13]
+-----------------------
+HTTP/2.0 200
+content-type: application/javascript; charset=utf-8
+content-encoding: gzip
+referrer-policy: unsafe-url
+x-robots-tag: noarchive, max-image-preview:large
+vary: Referer,Accept-Encoding, gd-facet-webview, gd-facet2025-webview, x-lambdaedge-localauth
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+strict-transport-security: max-age=7200
+x-kw-expires: Tue, 31 Mar 1981 05:00:00 GMT
+cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+smaxagedone: yup
+x-kw-cache-control: private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0
+accept-ranges: bytes
+date: Wed, 26 Nov 2025 20:34:39 GMT
+via: 1.1 google, 1.1 30be5eb8b2503b603efe27b044e1d9f6.cloudfront.net (CloudFront)
+x-cache: Miss from cloudfront
+x-amz-cf-pop: FCO50-P5
+x-amz-cf-id: skLAl6BLow_BebmlagJ1Y0iUA-ghtSaFvBFeFDW6_bTSUy5Mi8E36g==
+
+1f8b080000000000..1839d06c398e0100

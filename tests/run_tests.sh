@@ -14,6 +14,9 @@ CREATED_OUTPUTS=0
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# LSAN suppressions
+export LSAN_OPTIONS=suppressions=$(readlink -f $SCRIPT_DIR/../lsan.supp):print_suppressions=0
+
 # Find all test directories under the script's directory
 for test_dir in "$SCRIPT_DIR"/*/; do
     # Skip if not a directory

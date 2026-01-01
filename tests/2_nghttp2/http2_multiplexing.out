@@ -1,0 +1,113 @@
+[HTTP2.REQ conv:0 stream:1]
+-----------------------
+GET http://localhost:3000/doc/manual/html/index.html HTTP/2.0
+accept: */*
+accept-encoding: gzip, deflate
+user-agent: nghttp2/0.5.2-DEV
+
+
+[HTTP2.RES conv:0 stream:1]
+-----------------------
+HTTP/2.0 200
+server: nghttpd nghttp2/0.5.2-DEV
+content-length: 22617
+cache-control: max-age=3600
+date: Sat, 02 Aug 2014 10:50:25 GMT
+last-modified: Sat, 02 Aug 2014 07:58:59 GMT
+
+0a0a3c21444f4354..0a3c2f68746d6c3e
+
+[HTTP2.REQ conv:0 stream:3]
+-----------------------
+GET http://localhost:3000/doc/manual/html/_static/css/theme.css HTTP/2.0
+accept: */*
+accept-encoding: gzip, deflate
+user-agent: nghttp2/0.5.2-DEV
+
+
+[HTTP2.REQ conv:0 stream:5]
+-----------------------
+GET http://localhost:3000/doc/manual/html/_static/jquery.js HTTP/2.0
+accept: */*
+accept-encoding: gzip, deflate
+user-agent: nghttp2/0.5.2-DEV
+
+
+[HTTP2.REQ conv:0 stream:7]
+-----------------------
+GET http://localhost:3000/doc/manual/html/_static/underscore.js HTTP/2.0
+accept: */*
+accept-encoding: gzip, deflate
+user-agent: nghttp2/0.5.2-DEV
+
+
+[HTTP2.REQ conv:0 stream:9]
+-----------------------
+GET http://localhost:3000/doc/manual/html/_static/doctools.js HTTP/2.0
+accept: */*
+accept-encoding: gzip, deflate
+user-agent: nghttp2/0.5.2-DEV
+
+
+[HTTP2.REQ conv:0 stream:11]
+-----------------------
+GET http://localhost:3000/doc/manual/html/_static/js/theme.js HTTP/2.0
+accept: */*
+accept-encoding: gzip, deflate
+user-agent: nghttp2/0.5.2-DEV
+
+
+[HTTP2.RES conv:0 stream:3]
+-----------------------
+HTTP/2.0 200
+server: nghttpd nghttp2/0.5.2-DEV
+content-length: 85592
+cache-control: max-age=3600
+date: Sat, 02 Aug 2014 10:50:25 GMT
+last-modified: Thu, 15 May 2014 15:34:22 GMT
+
+2a7b2d7765626b69..3430343034307d0a
+
+[HTTP2.RES conv:0 stream:11]
+-----------------------
+HTTP/2.0 200
+server: nghttpd nghttp2/0.5.2-DEV
+content-length: 1675
+cache-control: max-age=3600
+date: Sat, 02 Aug 2014 10:50:25 GMT
+last-modified: Thu, 15 May 2014 15:34:22 GMT
+
+242820646f63756d..0a7d282429293b0a
+
+[HTTP2.RES conv:0 stream:9]
+-----------------------
+HTTP/2.0 200
+server: nghttpd nghttp2/0.5.2-DEV
+content-length: 6680
+cache-control: max-age=3600
+date: Sat, 02 Aug 2014 10:50:25 GMT
+last-modified: Sat, 01 Mar 2014 07:18:19 GMT
+
+2f2a0a202a20646f..28293b0a7d293b0a
+
+[HTTP2.RES conv:0 stream:7]
+-----------------------
+HTTP/2.0 200
+server: nghttpd nghttp2/0.5.2-DEV
+content-length: 41417
+cache-control: max-age=3600
+date: Sat, 02 Aug 2014 10:50:25 GMT
+last-modified: Wed, 30 Jan 2013 02:13:24 GMT
+
+2f2f202020202055..2874686973293b0a
+
+[HTTP2.RES conv:0 stream:5]
+-----------------------
+HTTP/2.0 200
+server: nghttpd nghttp2/0.5.2-DEV
+content-length: 252879
+cache-control: max-age=3600
+date: Sat, 02 Aug 2014 10:50:25 GMT
+last-modified: Fri, 02 Aug 2013 02:20:30 GMT
+
+2f2a210a202a206a..6e646f7720293b0a

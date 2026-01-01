@@ -1,0 +1,114 @@
+[HTTP2.REQ conv:1 stream:1]
+-----------------------
+GET https://c.clarity.ms/c.gif HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: image
+sec-fetch-storage-access: active
+referer: https://track.adform.net/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+priority: i
+
+
+[HTTP2.RES conv:1 stream:1]
+-----------------------
+HTTP/2.0 302
+date: Wed, 26 Nov 2025 20:34:41 GMT
+content-length: 0
+location: https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=D12F3AA94FBC4FB18F0D677406FF4CA9&RedC=c.clarity.ms&MXFR=0E329D9F3987606F08978B2F3D876EE1
+cache-control: private, no-cache, proxy-revalidate, no-store
+pragma: no-cache
+x-powered-by: ASP.NET
+p3p: CP="BUS CUR CONo FIN IVDo ONL OUR PHY SAMo TELo"
+set-cookie: SM=T; domain=c.clarity.ms; path=/; SameSite=None; Secure;
+set-cookie: MUID=0E329D9F3987606F08978B2F3D876EE1; domain=.clarity.ms; expires=Mon, 21-Dec-2026 20:34:41 GMT; path=/; SameSite=None; Secure; Priority=High;
+x-azure-ref: 20251126T203441Z-1587fb55f5ctcxwchC1ROM8e2g0000000d10000000004vum
+x-cache: CONFIG_NOCACHE
+
+
+[HTTP1 conv:0]
+-----------------------
+GET /eventfeed HTTP/1.1
+Host: realtimeeventfeeds.viafoura.co
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+Upgrade: websocket
+Origin: https://www.repubblica.it
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+Sec-WebSocket-Key: ZyJ6AnbtVl147IazgcOmmA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+
+
+[HTTP2.REQ conv:1 stream:3]
+-----------------------
+GET https://c.clarity.ms/c.gif?ctsa=mr&CtsSyncId=D12F3AA94FBC4FB18F0D677406FF4CA9&MUID=0008ED2EB2416A6A3058FB9EB3766B03 HTTP/2.0
+sec-ch-ua-platform: "Android"
+user-agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36
+sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"
+sec-ch-ua-mobile: ?1
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+sec-fetch-site: cross-site
+sec-fetch-mode: no-cors
+sec-fetch-dest: image
+sec-fetch-storage-access: active
+referer: https://track.adform.net/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: en-US,en;q=0.9
+cookie: SM=T
+cookie: MUID=0E329D9F3987606F08978B2F3D876EE1
+priority: i
+
+
+[HTTP2.RES conv:1 stream:3]
+-----------------------
+HTTP/2.0 200
+date: Wed, 26 Nov 2025 20:34:42 GMT
+content-type: image/gif
+content-length: 42
+cache-control: private, no-cache, proxy-revalidate, no-store
+pragma: no-cache
+last-modified: Tue, 11 Nov 2025 23:09:21 GMT
+etag: "b1798c366053dc1:0"
+x-powered-by: ASP.NET
+p3p: CP="BUS CUR CONo FIN IVDo ONL OUR PHY SAMo TELo"
+set-cookie: SM=C; domain=c.clarity.ms; path=/; SameSite=None; Secure;
+set-cookie: MUID=0008ED2EB2416A6A3058FB9EB3766B03; domain=.clarity.ms; expires=Mon, 21-Dec-2026 20:34:42 GMT; path=/; SameSite=None; Secure; Priority=High;
+set-cookie: MR=0; domain=c.clarity.ms; expires=Wed, 03-Dec-2025 20:34:42 GMT; path=/; SameSite=None; Secure;
+set-cookie: ANONCHK=0; domain=c.clarity.ms; expires=Wed, 26-Nov-2025 20:44:42 GMT; path=/; SameSite=None; Secure;
+x-azure-ref: 20251126T203442Z-1587fb55f5ctcxwchC1ROM8e2g0000000d10000000004vup
+x-cache: CONFIG_NOCACHE
+accept-ranges: bytes
+
+4749463839610100..01000002014c003b
+
+[HTTP1 conv:0]
+-----------------------
+HTTP/1.1 101 Switching Protocols
+upgrade: websocket
+connection: upgrade
+sec-websocket-accept: elgEVqeKEt5OE3xpyaK8sizqrO8=
+sec-websocket-extensions: permessage-deflate
+date: Wed, 26 Nov 2025 20:34:41 GMT
+server: istio-envoy
+
+
+[HTTP1 conv:0]
+-----------------------
+...00..w.x......U...;Y....G.w......M*...~7...%...D*.....	8.f...jTUh.......*... i..(.."{....yj.:.6@(.%Hh....M....V.$.[......V......l...9s...M.y..S......#......d..L.E.f.AZ./7..}??..y}.....D(..Z.~.hW2.Y...Hl^9.....8....U...|....]..O
+Uag......r.........d.y...$#:N..w..wh..r.Y....xP"0...]....Zi..l...e..=-....
+[HTTP1 conv:0]
+-----------------------
+..wnu.
+[HTTP1 conv:0]
+-----------------------
+..
