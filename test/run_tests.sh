@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -46,6 +44,10 @@ for test_dir in "$SCRIPT_DIR"/*/; do
 
         # Run the command and capture output
         actual_output=$(eval "$cmd" 2>&1)
+        if [ $? -ne 0 ]; then
+          echo -e "$actual_output" >&2
+          exit 1
+        fi
 
         # Check if expected output file exists
         if [ ! -f "$expected_out" ]; then

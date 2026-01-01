@@ -4,7 +4,10 @@ WIRESHARK := ../../wireshark
 WLIBS := $(WIRESHARK)/build/run
 
 CFLAGS := -g -O0 -I$(WIRESHARK) -I$(WIRESHARK)/include -I$(WIRESHARK)/build \
-	`pkgconf --cflags gmodule-2.0 gnutls libgcrypt libnghttp2`
+	`pkgconf --cflags gmodule-2.0 gnutls libgcrypt libnghttp2` \
+	-fsanitize=address -fsanitize=leak -fno-omit-frame-pointer
+
+LDFLAGS := -fsanitize=address -fsanitize=leak
 
 %.o :
 	$(CC) $(CFLAGS) -Wall -c -o $@ $^
@@ -14,7 +17,7 @@ all: pcap_example
 pcap_example: pcap_example.o libushark.a $(WLIBS)/libwireshark.a \
 		$(WLIBS)/libwiretap.a $(WLIBS)/libversion_info.a $(WLIBS)/libwsutil.a \
 		$(WLIBS)/libui.a
-	$(CC) -o $@ $(CFLAGS) $^ \
+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^ \
 		 `pkgconf --libs libpcre2-8 libpcap glib-2.0 libgcrypt libnghttp2 gnutls libcares libbrotlidec liblz4 libzstd zlib` -lm
 
 pcap_example.o: pcap_example.c
