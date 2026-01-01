@@ -7,21 +7,71 @@
 #include <pcap/pcap.h>
 #include "ushark.h"
 
+static bool short_mode = false;
+
+static void bytes_to_hex(const unsigned char *data, size_t len, char *hex_out) {
+    for (size_t i = 0; i < len; i++) {
+        sprintf(hex_out + (i * 2), "%02x", data[i]);
+    }
+    hex_out[len * 2] = '\0';
+}
+
 static void print_data(const unsigned char *plain_data, size_t data_len) {
-    if(plain_data) {
-        unsigned char *buf = malloc(data_len);
-        if (buf) {
-            memcpy(buf, plain_data, data_len);
+    char body_buf[64] = {0};
+    const unsigned char* payload = plain_data;
+    size_t payload_size = data_len;
 
-            // replace non-printable chars with @
-            for (unsigned int i = 0; i < data_len; i++) {
-                if (!isprint(buf[i]) && !isspace(buf[i]))
-                    buf[i] = '.';
+    if(!plain_data)
+        return;
+
+    printf("-----------------------\n");
+
+    if (short_mode) {
+        // Find the end of headers
+        const unsigned char *headers_end = (const unsigned char *) memmem(plain_data, data_len, "\r\n\r\n", 4);
+        if (headers_end) {
+            headers_end += 4;
+            payload_size = headers_end - plain_data;
+
+            if ((headers_end - plain_data) < data_len) {
+                char* body_out = body_buf;
+                const unsigned char *body_start = headers_end;
+                unsigned int body_len = data_len - (body_start - plain_data);
+
+                if (body_len <= 16) {
+                    // message is 16 bytes or less - show entire message
+                    bytes_to_hex(body_start, body_len, body_out);
+                    body_out += body_len;
+                } else {
+                    // show first and last 8 bytes (16 hex)
+                    bytes_to_hex(body_start, 8, body_out);
+                    body_out += 16;
+                    *body_out++ = '.';
+                    *body_out++ = '.';
+                    bytes_to_hex(body_start + (body_len - 8), 8, body_out);
+                    body_out += 16;
+                }
+
+                *body_out++ = '\r';
+                *body_out++ = '\n';
             }
-
-            printf("-----------------------\n%.*s\n", (int) data_len, buf);
-            free(buf);
         }
+    }
+
+    unsigned char *buf = malloc(payload_size);
+    if (buf) {
+        memcpy(buf, payload, payload_size);
+
+        // replace non-printable chars with @
+        for (unsigned int i = 0; i < payload_size; i++) {
+            if (!isprint(buf[i]) && !isspace(buf[i]))
+                buf[i] = '.';
+        }
+
+        printf("%.*s%s\n", (int) payload_size, buf,
+          body_buf[0] ? body_buf : "");
+
+        free(buf);
     }
 }
 
@@ -60,6 +110,7 @@ static void print_usage(const char *progname) {
     fprintf(stderr, "  -d, --display-filter <expr> Display filter expression\n");
     fprintf(stderr, "  -k, --keylog <path>         Path to TLS keylog file\n");
     fprintf(stderr, "  -2, --http2 <path>          Decode and print HTTP2 data\n");
+    fprintf(stderr, "  -s, --short                 Print max 16 Bytes of HTTP body\n");
     fprintf(stderr, "  -h, --help                  Show this help message\n");
 }
 
@@ -76,11 +127,12 @@ int main(int argc, char **argv) {
         {"display-filter", required_argument, 0, 'd'},
         {"keylog",         required_argument, 0, 'k'},
         {"http2",          no_argument,       0, '2'},
+        {"short",          no_argument,       0, 's'},
         {"help",           no_argument,       0, 'h'},
         {0, 0, 0, 0}
     };
 
-    while ((opt = getopt_long(argc, argv, "f:d:k:2h", long_options, NULL)) != -1) {
+    while ((opt = getopt_long(argc, argv, "f:d:k:2sh", long_options, NULL)) != -1) {
         switch (opt) {
             case 'f':
                 pcap_path = optarg;
@@ -93,6 +145,9 @@ int main(int argc, char **argv) {
                 break;
             case '2':
                 http2_mode = true;
+                break;
+            case 's':
+                short_mode = true;
                 break;
             case 'h':
                 print_usage(argv[0]);

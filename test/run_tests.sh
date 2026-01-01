@@ -34,7 +34,7 @@ for test_dir in "$SCRIPT_DIR"/*/; do
 
         # Build the command (relative to project root, which is parent of script dir)
         PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-        cmd="$PROJECT_ROOT/libushark/pcap_example -f $pcap_file --http2"
+        cmd="$PROJECT_ROOT/libushark/pcap_example --http2 -s -f $pcap_file"
 
         # Add -k parameter if keys.txt exists in the directory
         keys_file="${test_dir}keys.txt"
